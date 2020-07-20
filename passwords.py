@@ -26,15 +26,33 @@ class password():
 
         self.root.destroy()
         def text_file():
+           #create a file named text
            f=open('text.txt','a')
            f.close()
+
            with open('text.txt','r') as f :
-             
-             for q in f:
-                global i
-                mylabel=Label(window,text=q,font=('Times', 10))
-                mylabel.grid(row=i , columnspan =3)
-                i+=1
+                decrypt=""
+                
+                while 1: 
+      
+                  # read by character 
+                  char = f.read(1)           
+                  if not char:  
+                      break
+                        
+                  else:
+                     #decrypting to windo
+                          if char == ' ':
+                            decrypt += ' '
+                          else:
+                            decrypt += chr(ord(char) + 4)
+                y = decrypt.split()
+                for q in y:
+                    
+                          global i
+                          mylabel=Label(window,text=q,font=('Times', 13))
+                          mylabel.grid(row=i , columnspan =3)
+                          i+=1
         
 #user window
 
@@ -45,13 +63,40 @@ class password():
             name = site_e.get()
             site_e.delete(0,'end')
             pas=password_e.get()
-            with open('text.txt','a') as f :
-               f.write(" site:-"+name+'--'+ "password:-" + pas)
             password_e.delete(0,'end')
+
+            #encrypting to file
+            encry=''
+            encrypt=''
+            for letter in pas:
+                    if letter == ' ':
+                       encrypt += ' '
+                    else:
+                       encrypt += chr(ord(letter) - 4)
+            for letter in name:
+                    if letter == ' ':
+                       encry += ' '
+                    else:
+                       encry += chr(ord(letter) - 4)
+            a=""
+            for letter in " site:-":
+                    if letter == ' ':
+                       a += ' '
+                    else:
+                       a += chr(ord(letter) - 4)
+            b=""
+            for letter in "--password:-":
+                    if letter == ' ':
+                       b += ' '
+                    else:
+                       b += chr(ord(letter) - 4)
+            
+            with open('text.txt','a') as f :
+               f.write(a+encry+b + encrypt)
             
             if True:
                 global i
-                mylabel=Label(window,text=" site:-"+name+'--'+ "password:-" + pas,font=('Times', 10))
+                mylabel=Label(window,text=" site:-"+name+'--'+ "password:-" + pas,font=('Times', 13))
                 mylabel.grid(row=i , columnspan =3)
                 i+=1 
 
