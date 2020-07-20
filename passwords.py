@@ -18,6 +18,7 @@ class password():
        
         self.root.mainloop()
     
+    #check for master password match
         
     def check(self):
       self.value = self.e.get()
@@ -29,7 +30,7 @@ class password():
            #create a file named text
            f=open('text.txt','a')
            f.close()
-
+           # print previous sites and password
            with open('text.txt','r') as f :
                 decrypt=""
                 
@@ -46,6 +47,7 @@ class password():
                             decrypt += ' '
                           else:
                             decrypt += chr(ord(char) + 4)
+                #CONVERT STRING TO LIST
                 y = decrypt.split()
                 for q in y:
                     
@@ -119,6 +121,8 @@ class password():
 
 
         window.mainloop()
+      
+      #wrong master password
       else:
         messagebox.showinfo(' wrong password ')
 
