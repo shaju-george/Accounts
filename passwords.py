@@ -17,6 +17,7 @@ class password():
         
        
         self.root.mainloop()
+    
         
     def check(self):
       self.value = self.e.get()
@@ -24,6 +25,17 @@ class password():
       if "sha" == self.value:
 
         self.root.destroy()
+        def text_file():
+           f=open('text.txt','a')
+           f.close()
+           with open('text.txt','r') as f :
+             
+             for q in f:
+                global i
+                mylabel=Label(window,text=q,font=('Times', 10))
+                mylabel.grid(row=i , columnspan =3)
+                i+=1
+        
 #user window
 
         global i
@@ -33,13 +45,15 @@ class password():
             name = site_e.get()
             site_e.delete(0,'end')
             pas=password_e.get()
+            with open('text.txt','a') as f :
+               f.write(" site:-"+name+'--'+ "password:-" + pas)
             password_e.delete(0,'end')
             
             if True:
                 global i
-                mylabel=Label(window,text=" site :"+name + " password :" + pas,font=('Times', 18))
+                mylabel=Label(window,text=" site:-"+name+'--'+ "password:-" + pas,font=('Times', 10))
                 mylabel.grid(row=i , columnspan =3)
-                i+=1
+                i+=1 
 
         window= Tk()
         window.title(' my accouts')
@@ -49,6 +63,8 @@ class password():
         password= Label(window, text='password',font=('Times', 18))
         password_e= Entry(window, font=('Times', 18),width = 30,borderwidth=10)
         submit=Button(window, text='submit',font=('Times', 18),command=store)
+
+        text_file()
 
         site.grid(row=0,column=0,sticky= W)
         password.grid(row=1,column=0,sticky= E)
@@ -60,6 +76,10 @@ class password():
         window.mainloop()
       else:
         messagebox.showinfo(' wrong password ')
+
+    
+      
+      
 p=password()
 
 
